@@ -14,6 +14,8 @@ export class AppComponent implements OnInit {
   selectedHero: Hero;
   heroes: Hero[];
 
+  constructor(private heroService: HeroService) {}
+
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
   }
@@ -22,9 +24,7 @@ export class AppComponent implements OnInit {
     this.getHeroes();
   }
 
-  constructor(private heroService: HeroService) {}
-
   getHeroes(): void {
-    this.heroes = this.heroService.getHeroes();
+    this.heroService.getHeroes().then(heroes => this.heroes = heroes);
   }
 }
